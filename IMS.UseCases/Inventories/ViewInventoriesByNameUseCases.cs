@@ -1,13 +1,14 @@
 ﻿using IMS.CoreBusiness;
+using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
 
 namespace IMS.UseCases.Inventories
 {
-    public class ViewInventoriesUseCases
+    public class ViewInventoriesByNameUseCases : IViewInventoriesByNameUseCases
     {
         private readonly IInventoryRepository _inventoryRepository;
 
-        public ViewInventoriesUseCases(IInventoryRepository inventoryRepository)
+        public ViewInventoriesByNameUseCases(IInventoryRepository inventoryRepository)
         {
             _inventoryRepository = inventoryRepository;
         }

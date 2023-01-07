@@ -1,14 +1,17 @@
-﻿@if (Inventories != null && Inventories.Any())
+﻿@inject NavigationManager NavigationManager
+
+@if (Inventories != null && Inventories.Any())
 {
     @foreach (var inv in Inventories)
     {
         <tr>
             <td>@inv.InventoryName</td>
-            <td>@inv.Qiantity</td>
+            <td>@inv.Quantity</td>
             <td>@inv.Price.ToString("C")</td>
             <td>
                 <button type="button"
-                class="btn btn-light">
+                class="btn btn-light"
+                @onclick="@(()=> EditInventory(inv.InventoryId))">
                     Edit
                 </button>
             </td>
@@ -26,4 +29,8 @@
 
     #endregion
 
+    private void EditInventory(int inventoryId)
+    {
+        NavigationManager.NavigateTo($"/editinventory/{inventoryId}");
+    }
 }

@@ -1,0 +1,38 @@
+﻿@inject IViewInventoriesByNameUseCases ViewInventoriesByNameUseCases;
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <InventoryListItemComponent Inventories="_listInventories"></InventoryListItemComponent>
+    </tbody>
+</table>
+
+@code {
+
+    #region Parameters
+    [Parameter]
+    public string SearchTerm { get; set; }
+    #endregion
+
+
+    #region Private
+    private List<Inventory> _listInventories = new List<Inventory>();
+    #endregion
+
+
+    #region Overrides
+    protected override async Task OnParametersSetAsync()
+    {
+        _listInventories = (await ViewInventoriesByNameUseCases.ExecuteAsync(SearchTerm)).ToList();
+    }
+    #endregion
+    
+
+}

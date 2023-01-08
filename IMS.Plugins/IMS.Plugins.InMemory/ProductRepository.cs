@@ -25,7 +25,19 @@ namespace IMS.Plugins.InMemory
             if (string.IsNullOrWhiteSpace(productName)) return await Task.FromResult(_listOfProducts);
 
             return _listOfProducts.Where(x =>
-                x.ProductName.Contains(productName, StringComparison.CurrentCultureIgnoreCase));
+                x.ProductName.Contains(productName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public Task AddProductAsync(Product product)
+        {
+            if (_listOfProducts.Any(x =>
+                    x.ProductName.Equals(product.ProductName, StringComparison.OrdinalIgnoreCase)))
+                return Task.CompletedTask;
+
+            var maxId = _listOfProducts.Max(x => x.ProductId);
+            product.ProductId = maxId + 1;
+            _listOfProducts.Add(product);
+            return Task.CompletedTask;
         }
     }
 }

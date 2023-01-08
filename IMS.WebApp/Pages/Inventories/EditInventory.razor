@@ -36,17 +36,19 @@
             class="btn btn-primary">
         Save
     </button>
-    
+
     <button type="button"
             class="btn btn-warning"
-            @onclick="Cancel">Cancel</button>
+            @onclick="Cancel">
+        Cancel
+    </button>
 </EditForm>
 
 @code {
     [Parameter]
     public int InvId { get; set; }
 
-    private Inventory _inventory = new  Inventory();
+    private Inventory _inventory = new Inventory();
 
     protected override async Task OnParametersSetAsync()
     {

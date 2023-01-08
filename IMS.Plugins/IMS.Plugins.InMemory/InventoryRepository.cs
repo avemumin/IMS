@@ -21,12 +21,12 @@ namespace IMS.Plugins.InMemory
         {
             if (string.IsNullOrWhiteSpace(name)) return await Task.FromResult(_inventories);
 
-            return _inventories.Where(x => x.InventoryName.Contains(name, StringComparison.CurrentCultureIgnoreCase));
+            return _inventories.Where(x => x.InventoryName.Contains(name, StringComparison.OrdinalIgnoreCase));
         }
 
         public Task AddInventoryAsync(Inventory inventory)
         {
-            if (_inventories.Any(x => x.InventoryName.Equals(inventory.InventoryName, StringComparison.CurrentCultureIgnoreCase)))
+            if (_inventories.Any(x => x.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)))
                 return Task.CompletedTask;
 
             var maxId = _inventories.Max(x => x.InventoryId);
@@ -39,9 +39,9 @@ namespace IMS.Plugins.InMemory
 
         public Task EditInventoryAsync(Inventory inventory)
         {
-            if (_inventories.Any(x => x.InventoryId == inventory.InventoryId
-                                   && x.InventoryName.Equals(inventory.InventoryName, StringComparison.CurrentCultureIgnoreCase)))
-                return Task.CompletedTask;
+            //if (_inventories.Any(x => x.InventoryId == inventory.InventoryId
+            //                       && x.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)))
+            //    return Task.CompletedTask;
 
             var getToEdit = _inventories.FirstOrDefault(x => x.InventoryId == inventory.InventoryId);
 

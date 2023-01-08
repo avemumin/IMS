@@ -1,5 +1,7 @@
 ﻿@page "/products"
 
+
+@inject NavigationManager NavigationManager
 <h3>Product List</h3>
 
 <br/>
@@ -10,7 +12,9 @@
 
 </ProductListComponent>
 <br/>
-
+<button type="button"
+        class="btn btn-primary"
+        @onclick="AddProduct">Add Product</button>
 
 @code {
 
@@ -19,5 +23,10 @@
     private void OnSearchProduct(string searchTerm)
     {
         _searchTerm = searchTerm;
+    }
+
+    private void AddProduct()
+    {
+        NavigationManager.NavigateTo("/addproduct");
     }
 }

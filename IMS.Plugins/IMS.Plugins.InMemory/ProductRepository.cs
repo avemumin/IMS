@@ -13,7 +13,7 @@ namespace IMS.Plugins.InMemory
             {
                 new Product() {ProductId = 1, ProductName = "Bike", Price = 150, Quantity = 10},
                 new Product() {ProductId = 2, ProductName = "Car", Price = 25000, Quantity = 5},
-                new Product() {ProductId = 3, ProductName = "Cat", Price = 3.41M, Quantity = 22},
+                new Product() {ProductId = 3, ProductName = "Cat", Price = 3.41, Quantity = 22},
                 new Product() {ProductId = 4, ProductName = "Dog", Price = 31, Quantity = 3},
                 new Product() {ProductId = 5, ProductName = "Nic", Price = 15, Quantity = 31}
 

@@ -8,6 +8,7 @@ namespace IMS.UseCases.PluginInterfaces
         Task AddInventoryAsync(Inventory inventory);
         Task EditInventoryAsync(Inventory inventory);
         Task<Inventory> GetInventoryByIdAsync(int inventoryId);
+        Task UpdateInventoryAsync(Inventory inventory);
     }
 }
                                  

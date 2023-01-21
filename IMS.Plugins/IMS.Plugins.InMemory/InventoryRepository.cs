@@ -67,5 +67,10 @@ namespace IMS.Plugins.InMemory
             };
             return await Task.FromResult(newInv);
         }
+
+        public Task UpdateInventoryAsync(Inventory inventory)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

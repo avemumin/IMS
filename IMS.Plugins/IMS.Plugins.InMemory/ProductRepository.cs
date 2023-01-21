@@ -49,22 +49,47 @@ namespace IMS.Plugins.InMemory
                 getToEdit.ProductName = product.ProductName;
                 getToEdit.Price = product.Price;
                 getToEdit.Quantity = product.Quantity;
+                getToEdit.ProductInventories = product.ProductInventories;
             }
 
             return Task.CompletedTask;
         }
 
-        public async Task<Product> GetProductByIdAsync(int productId)
+        public async Task<Product?> GetProductByIdAsync(int productId)
         {
-            var inv = _listOfProducts.First(x => x.ProductId == productId);
-            var newInv = new Product()
+            var prod = _listOfProducts.FirstOrDefault(x => x.ProductId == productId);
+            var newProd = new Product();
+            if (prod != null)
             {
-                ProductId = inv.ProductId,
-                ProductName = inv.ProductName,
-                Price = inv.Price,
-                Quantity = inv.Quantity
+                newProd.ProductId = prod.ProductId;
+                newProd.ProductName = prod.ProductName;
+                newProd.Price = prod.Price;
+                newProd.Quantity = prod.Quantity;
+                newProd.ProductInventories = new List<ProductInventory>();
+                if (prod.ProductInventories != null && prod.ProductInventories.Count > 0)
+                {
+                    foreach (var prodInv in prod.ProductInventories)
+                    {
+                        var newProdInv = new ProductInventory()
+                        {
+                            InventoryId = prodInv.InventoryId,
+                            ProductId = prodInv.ProductId,
+                            Product = prod,
+                            Inventory = new Inventory(),
+                            InventoryQuantity = prodInv.InventoryQuantity
+                        };
+                        if (prodInv.Inventory != null)
+                        {
+                            newProdInv.Inventory.InventoryId = prodInv.Inventory.InventoryId;
+                            newProdInv.Inventory.InventoryName = newProdInv.Inventory.InventoryName;
+                            newProdInv.Inventory.Price = newProdInv.Inventory.Price;
+                            newProdInv.Inventory.Quantity = newProdInv.Inventory.Quantity;
+                        }
+                        newProd.ProductInventories.Add(newProdInv);
+                    }
+                }
             };
-            return await Task.FromResult(newInv);
+            return await Task.FromResult(newProd);
 
         }
     }

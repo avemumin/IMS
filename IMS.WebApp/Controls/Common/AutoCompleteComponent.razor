@@ -3,8 +3,8 @@
     <label for="search">@Label</label>
     <input type="text"
            class="form-control"
-           @bind-Value="userInput"
-           @bind-Value:event="oninput" />
+           @bind-value="userInput"
+           @bind-value:event="oninput" />
 </div>
 
 @if (searchResult != null && searchResult.Any())
@@ -13,8 +13,8 @@
         <ul>
             @foreach (var item in searchResult)
             {
-                <li @key="@item.Id">
-                    @*  @onclick="@(async () => { await OnSelectInventory(inv); })">*@
+                <li @key="@item.Id"
+                    @onclick="@(()=>OnSelectItem(item))">
                     @item.Name
 
                 </li>
@@ -30,6 +30,9 @@
     public Func<string, List<ItemViewModel>>? SearchFunction { get; set; }
 
     private List<ItemViewModel>? searchResult = null;
+
+    private ItemViewModel? selectedItem = null;
+
     private string _userInput = string.Empty;
 
     public string userInput
@@ -38,13 +41,21 @@
         set
         {
             _userInput = value;
-            if (!string.IsNullOrEmpty(_userInput) && SearchFunction != null)
+            if (!string.IsNullOrWhiteSpace(_userInput) && SearchFunction != null)
             {
                 searchResult = SearchFunction(_userInput);
             }
         }
     }
 
+    public void OnSelectItem(ItemViewModel? item)
+    {
+        selectedItem = item;
+
+        searchResult = null;
+        if (item != null)
+            userInput = item.Name;
+    }
     public class ItemViewModel
     {
         public int Id { get; set; }

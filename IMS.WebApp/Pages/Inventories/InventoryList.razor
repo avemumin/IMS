@@ -20,13 +20,17 @@
 
 <p>
     <AutoCompleteComponent Label="Invenoty"
-                           SearchFunction="SearchInvenoty">
+                           SearchFunction="SearchInvenoty"
+                           OnItemSelected="OnItemSelected" >
 
     </AutoCompleteComponent>
+    <br/>
+    
+    @selectedItem?.Name
 </p>
 
 @code {
-
+    private ItemViewModel? selectedItem = null;
     private string _searchTerm = string.Empty;
     private void OnInventorySearch(string searchTerm)
     {
@@ -38,6 +42,10 @@
         NavigationManager.NavigateTo("/addinventory");
     }
 
+    private void OnItemSelected(ItemViewModel item)
+    {
+        selectedItem = item;
+    }
     private List<ItemViewModel>? SearchInvenoty(string name)
     {
         var list = ViewInventoriesByNameUseCases.ExecuteAsync(name).GetAwaiter().GetResult();

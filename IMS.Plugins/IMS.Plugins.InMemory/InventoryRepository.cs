@@ -70,7 +70,14 @@ namespace IMS.Plugins.InMemory
 
         public Task UpdateInventoryAsync(Inventory inventory)
         {
-            throw new NotImplementedException();
+            var inv = _inventories.FirstOrDefault(x => x.InventoryId == inventory.InventoryId);
+            if (inv != null)
+            {
+                inv.InventoryName = inventory.InventoryName;
+                inv.Price = inventory.Price;
+                inv.Quantity = inventory.Quantity;
+            }
+            return Task.CompletedTask;
         }
     }
 }

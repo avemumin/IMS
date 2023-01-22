@@ -1,8 +1,8 @@
 ﻿@page "/inventories"
-@using static IMS.WebApp.Controls.Common.AutoCompleteComponent
+
 
 @inject NavigationManager NavigationManager
-@inject IViewInventoriesByNameUseCases ViewInventoriesByNameUseCases
+
 <h3>Inventory List</h3>
 <br />
 <SearchInventoryComponent OnSearchInventory="OnInventorySearch">
@@ -18,7 +18,7 @@
     Add Inventory
 </button>
 
-<p>
+@*<p>
     <AutoCompleteComponent Label="Invenoty"
                            SearchFunction="SearchInvenoty"
                            OnItemSelected="OnItemSelected" >
@@ -27,10 +27,10 @@
     <br/>
     
     @selectedItem?.Name
-</p>
+</p>*@
 
 @code {
-    private ItemViewModel? selectedItem = null;
+    
     private string _searchTerm = string.Empty;
     private void OnInventorySearch(string searchTerm)
     {
@@ -42,15 +42,5 @@
         NavigationManager.NavigateTo("/addinventory");
     }
 
-    private void OnItemSelected(ItemViewModel item)
-    {
-        selectedItem = item;
-    }
-    private List<ItemViewModel>? SearchInvenoty(string name)
-    {
-        var list = ViewInventoriesByNameUseCases.ExecuteAsync(name).GetAwaiter().GetResult();
-
-        if (list == null) return null;
-        return list.Select(x => new ItemViewModel { Id = x.InventoryId, Name = x.InventoryName })?.ToList();
-    }
+   
 }

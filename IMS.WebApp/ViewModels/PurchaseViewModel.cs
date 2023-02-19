@@ -9,7 +9,7 @@ namespace IMS.WebApp.ViewModels
         [Range(minimum:1,maximum:int.MaxValue,ErrorMessage="You have to select an inventory")]
         public int InventoryId { get; set; }
         [Required]
-        [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Uantity  has to be greater than 1")]
+        [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Quantity  has to be greater than 1")]
         public int QunatityToPurchase { get; set; }
         public double InventoryPrice { get; set; }
         

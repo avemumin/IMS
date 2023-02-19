@@ -40,7 +40,7 @@ namespace IMS.Plugins.InMemory
             return Task.CompletedTask;
         }
 
-        public Task EditProductAsync(Product product)
+        public Task UpdateProductAsync(Product product)
         {
             var getToEdit = _listOfProducts.FirstOrDefault(x => x.ProductId == product.ProductId);
 

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using IMS.CoreBusiness;
+using IMS.WebApp.ViewModelsValidations;
+using System.ComponentModel.DataAnnotations;
 
 namespace IMS.WebApp.ViewModels
 {
@@ -10,7 +12,10 @@ namespace IMS.WebApp.ViewModels
         public int ProductId { get; set; }
         [Required]
         [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Quantity  has to be greater than 1")]
+        [Produce_EnsureEnoughtInventoryQuantity]
         public int QunatityToProduct { get; set; }
-        
+
+        public Product? Product { get; set; } = null;
+
     }
 }

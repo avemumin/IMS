@@ -37,6 +37,7 @@ builder.Services.AddTransient<IPurchaseInventoryUseCase, PurchaseInventoryUseCas
 builder.Services.AddTransient<IProduceProductUseCase, ProduceProductUseCase>();
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
